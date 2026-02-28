@@ -2436,18 +2436,19 @@ local function EnableAntiBlitzShot()
     -- Tween left movement (side dodge)
     ------------------------------------------------------
     local function tweenLeft(dist)
-        if not hrp then return end
-        local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Linear)
-        local tween = TweenService:Create(
-            hrp,
-            tweenInfo,
-            { CFrame = hrp.CFrame * CFrame.new(-dist, 0, 0) }
-        )
-        pcall(function()
-            tween:Play()
-            tween.Completed:Wait()
-        end)
-    end
+    if not hrp then return end
+    -- super fast tween
+    local tweenInfo = TweenInfo.new(0.02, Enum.EasingStyle.Linear)
+    local tween = TweenService:Create(
+        hrp,
+        tweenInfo,
+        { CFrame = hrp.CFrame * CFrame.new(-dist, 0, 0) }
+    )
+    pcall(function()
+        tween:Play()
+        tween.Completed:Wait()
+    end)
+end
 
     ------------------------------------------------------
     -- Screen cover (flash / impact simulation)
@@ -2700,4 +2701,5 @@ Content:Input({   -- or :TextInput if your WindUI fork prefers that name
             print("[Slick Back] Jump height set to:", jumpHeight)
         end
     end
+
 })
